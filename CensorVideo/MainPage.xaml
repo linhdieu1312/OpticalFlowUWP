@@ -1,0 +1,261 @@
+﻿<Page
+    x:Class="CensorVideo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CensorVideo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:converters="using:CensorVideo.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+   <Page.Resources>
+        <Style x:Key="BorderlessTextBoxStyle" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+   </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <!--Media player element-->
+            <Grid Grid.Row="0" x:Name="MP" Background="#332F2F">
+
+                <MediaPlayerElement x:Name="mediaPlayerElement" 
+                                    AutoPlay="False" 
+                                    AreTransportControlsEnabled="False"/>
+                <Canvas x:Name="MainCanvas" />
+
+            </Grid>
+
+            <Grid Grid.Row="1" 
+                  Background="#2D2C2C">
+                <Button x:Name="PlayBtn" 
+                        HorizontalAlignment="Center" 
+                        Click="playBtn_Click"
+                        Background="#2D2C2C">
+                    <Image x:Name="PlayButton" Source="Assets/play-button-.png"/>
+                </Button>
+                <Button x:Name="PauseBtn" 
+                    HorizontalAlignment="Center" 
+                    Click="pauseBtn_Click" 
+                    Visibility="Collapsed"
+                    Background="#2D2C2C">
+                    <Image Source="Assets/pause-button-.png"/>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="2" 
+                  Background="#2D2C2C">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" 
+                                Padding="20, 0" 
+                                HorizontalAlignment="Center">
+                        <TextBlock x:Name="startTxt" 
+                                   Text="00:00:00" 
+                                   Width="90" 
+                                   Height="40" 
+                                   FontSize="20" 
+                                   Foreground="#6F6D6D" 
+                                   TextAlignment="Center"/>
+                        <Slider x:Name="durationSlider" 
+                                Width="800" 
+                                Minimum="0" 
+                                Background="#6F6D6D" 
+                                Margin="10, 0" 
+                                ValueChanged="durationSlider_ValueChanged"/>
+                        <TextBlock x:Name="endTxt" 
+                                   Text="00:00:00" 
+                                   Width="90" 
+                                   Height="40" 
+                                   FontSize="20" 
+                                   Foreground="#6F6D6D" 
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+                        <Button x:Name="addBtn" 
+                                Background="#2D2C2C" 
+                                Click="addBtn_Click">
+                            <Image Source="Assets/web-video-upload.png" 
+                                   Width="50"/>
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="Upload video" />
+                            </ToolTipService.ToolTip>
+                        </Button>
+                        <Button x:Name="CensoringBtn" 
+                                Background="#2D2C2C" 
+                                Click="CensoringBtn_Click">
+                            <Image Source="Assets/photography-focus.png" 
+                                    Width="50"/>
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="Add a text watermark" />
+                            </ToolTipService.ToolTip>
+                        </Button>
+                        <Button x:Name="textWatermarkBtn" 
+                                Background="#2D2C2C" 
+                                Click="textWatermarkBtn_Click">
+                            <Image Source="Assets/graphic-tool.png" 
+                                   Width="50"/>
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="Add a text watermark" />
+                            </ToolTipService.ToolTip>
+                        </Button>
+                        <Button x:Name="imgWatermarkBtn" 
+                                Background="#2D2C2C" 
+                                Click="imgWatermarkBtn_Click">
+                            <Image Source="Assets/photo.png" 
+                                   Width="50"/>
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="Add an image watermark" />
+                            </ToolTipService.ToolTip>
+                        </Button>
+                        <Button x:Name="saveBtn" 
+                                Background="#2D2C2C"
+                                Click="saveBtn_Click">
+                            <Image Source="Assets/web-video-download.png" 
+                                   Width="50"/>
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="Save video" />
+                            </ToolTipService.ToolTip>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="#474444" Margin="1,0,-1,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Setting-->
+            <Grid Padding="10,5" VerticalAlignment="Top">
+                <RelativePanel Width="240">
+                    <Button x:Name="AddOverlay" Content="Add Overlays" Margin="0, 10" Padding="5" Background="White" CornerRadius="5" IsEnabled="False" BorderThickness="1" BorderBrush="White" Click="AddOverlay_Click"/>
+                    <Button x:Name="RemoveOverlay" Content="Remove Overlays" Margin="10, 10, 0, 10 " Padding="5" Background="White" CornerRadius="5" IsEnabled="False" BorderThickness="1" BorderBrush="White" RelativePanel.RightOf="AddOverlay" Click="RemoveOverlay_Click"/>
+                    <TextBox x:Name="TextW" 
+                             Text="{Binding InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             PlaceholderForeground="Gray"
+                             PlaceholderText="Text watermark"
+                             Height="35" 
+                             CornerRadius="5" 
+                             Background="White" 
+                             Width="230" 
+                             RelativePanel.Below="AddOverlay" 
+                             Margin="0, 5"
+                             Style="{StaticResource BorderlessTextBoxStyle}"
+                             VerticalContentAlignment="Center"/>
+                    <Grid x:Name="fontGroup" 
+                          RelativePanel.Below="TextW" 
+                          Margin="0,10, 10, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" 
+                                   Text="Font" 
+                                   Width="80" 
+                                   Height="35" 
+                                   FontSize="20"
+                                   Foreground="White"/>
+                        <ComboBox x:Name="fontCombo" 
+                                  Grid.Column="1" 
+                                  Width="150" 
+                                  Height="35" 
+                                  SelectedValue="{Binding NewFont, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Background="White" 
+                                  CornerRadius="5"
+                                  SelectionChanged="fontCombo_SelectionChanged"
+                                  MaxDropDownHeight="300"
+                                  MinWidth="170"
+                                  FontSize="12"
+                                  VerticalAlignment="Bottom"
+                                  />
+                    </Grid>
+                    <Grid x:Name="colorGroup" 
+                          RelativePanel.Below="fontGroup" 
+                          Margin="0,10, 10, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" 
+                                       Text="Color" 
+                                       Width="60" 
+                                       Height="35" 
+                                       FontSize="20"
+                                       Foreground="White"/>
+                        <ComboBox x:Name="colorCombo" 
+                                      Grid.Column="1" 
+                                      Width="170" 
+                                      Height="35" 
+                                      DisplayMemberPath="Key"
+                                      SelectedValuePath="Value"
+                                      SelectedValue="{Binding NewColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      VerticalAlignment="Bottom" 
+                                      Background="White" 
+                                      FontSize="12"
+                                      CornerRadius="5"
+                                      SelectionChanged="colorCombo_SelectionChanged"
+                                      />
+                    </Grid>
+
+                </RelativePanel>
+
+
+            </Grid>
+            <!--list watermark-->
+            <Grid Grid.Row="1"
+                  BorderThickness="0, 1, 0, 0"
+                  BorderBrush="#332F2F"
+                  Padding="0, 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="listView" 
+                           Text="Watermark Collection" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Top"
+                           />
+
+                <ListView x:Name="WatermarkListView" ItemsSource="{Binding overlayElements}" Grid.Row="1" Height="400" SelectionMode="Single"
+                          SelectionChanged="WatermarkListView_SelectionChanged" Margin="0, 10">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0, 0, 0, 5">
+                                <Image 
+                                    Visibility="{Binding Type, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='image'}"
+                                    Source="{Binding BitmapSource}" MaxWidth="50" MaxHeight="50" Stretch="Uniform"/>
+                                <TextBlock
+                                    Visibility="{Binding Type, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='text'}"
+                                    Text="{Binding Text}" FontFamily="{Binding Font}" Foreground="{Binding Color}" />
+                            </StackPanel>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+
+
+    </Grid>
+
+</Page>
