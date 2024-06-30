@@ -119,10 +119,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BindableBase.cs" />
-    <Compile Include="Converters\StringToVisibilityConverter.cs" />
-    <Compile Include="FontHelper.cs" />
-    <Compile Include="GridWatermark.cs" />
+    <Compile Include="Controller\BindableBase.cs" />
+    <Compile Include="Controller\Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Model\FontHelper.cs" />
+    <Compile Include="Model\GridWatermark.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -135,6 +135,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\graphic-tool.png" />
+    <Content Include="Assets\icons8-circled-play-64.png" />
+    <Content Include="Assets\icons8-pause-50.png" />
     <Content Include="Assets\pause-button-.png" />
     <Content Include="Assets\photo.png" />
     <Content Include="Assets\photography-focus.png" />
@@ -184,6 +186,7 @@
   <ItemGroup>
     <Content Include="Assets\TileMosaic.bin" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

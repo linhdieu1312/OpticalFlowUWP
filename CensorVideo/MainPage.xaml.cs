@@ -159,6 +159,8 @@ namespace CensorVideo
             throw new NotImplementedException();
         }
 
+        
+
         public void UpdateMediaElementSource()
         {
 
@@ -337,25 +339,31 @@ namespace CensorVideo
             ComboBox comboBox = sender as ComboBox;
         }
 
+        private async void AddOverlay_Click(object sender, RoutedEventArgs e)
+        {
+            await CreateOverlay(videoDuration);
+            MainCanvas.Visibility = Visibility.Collapsed;
+            AddOverlay.IsEnabled = false;
+            RemoveOverlay.IsEnabled = true;
+            UpdateMediaElementSource();
+        }
+
         private GridWatermark GridRect { get; set; }
+
+
         private void CensoringBtn_Click(object sender, RoutedEventArgs e)
         {
             GridRect = new GridWatermark("rect");
             MainCanvas.Children.Add(GridRect.WatermarkGrid);
             AddOverlay.IsEnabled = true;
+            AddMask.IsEnabled = true;
         }
 
-        private void AddOverlay_Click(object sender, RoutedEventArgs e)
+        private void AddMask_Click(object sender, RoutedEventArgs e)
         {
-            //await CreateOverlay(videoDuration);
-            //MainCanvas.Visibility = Visibility.Collapsed;
-            //AddOverlay.IsEnabled = false;
-            //RemoveOverlay.IsEnabled = true;
-            //UpdateMediaElementSource();
-
             var TrackingPath = new List<TrackingPoint>();
             var MaskList = new List<MaskInfo>();
-            var Mask = new MaskInfo(0,0,0,0);
+            var Mask = new MaskInfo(0, 0, 0, 0);
             var videoWidth = clip.GetVideoEncodingProperties().Width;
             var videoHeight = clip.GetVideoEncodingProperties().Height;
             Mask.IsTrackingMask = true;
@@ -363,7 +371,7 @@ namespace CensorVideo
             var transform = GridRect.WatermarkGrid.RenderTransform as TranslateTransform;
             Mask.PosX = (transform.X + GridRect.WatermarkGrid.Width) / videoWidth;
             Mask.PosY = (transform.Y + GridRect.WatermarkGrid.Height) / videoHeight;
-            Mask.UIWidth = GridRect.WatermarkGrid.Width / videoWidth; 
+            Mask.UIWidth = GridRect.WatermarkGrid.Width / videoWidth;
             Mask.UIHeight = GridRect.WatermarkGrid.Height / videoHeight;
             /* var overlay = overlayElements[0];
              var transform = overlay.WatermarkGrid.RenderTransform as TranslateTransform;
@@ -613,34 +621,8 @@ namespace CensorVideo
                 if (_currentItem == null) return;
                 _currentItem.textWatermark.Foreground = value;
                 _currentItem.Color = value;
-                //UpdateSelectedColorName();
             }
         }
-        /*private string _selectedColorName;
-        public string SelectedColorName
-        {
-            get { return _selectedColorName; }
-            set
-            {
-                if (_selectedColorName != value)
-                {
-                    _selectedColorName = value;
-                    OnPropertyChanged("NewColorName");
-                }
-            }
-        }
-
-        private void UpdateSelectedColorName()
-        {
-            foreach (var color in colors)
-            {
-                if (color.Value == NewColor)
-                {
-                    SelectedColorName = color.Key;
-                    break;
-                }
-            }
-        }*/
 
         private void RemoveOverlay_Click(object sender, RoutedEventArgs e)
         {
