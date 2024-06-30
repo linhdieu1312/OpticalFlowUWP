@@ -165,42 +165,6 @@ namespace Win2DCustomEffects
                             }
                         }
 
-                //if (_masks != null)
-                //{
-                //    int i = 0;
-                //    for (; i < _masks.Count - 1; i++)
-                //        if (_masks[i].StartTime <= elapsedTime && _masks[i + 1].StartTime > elapsedTime)
-                //            break;
-                //    if (i < _masks.Count - 1)
-                //    {
-                //        float ratio = (float)(elapsedTime - _masks[i].StartTime) / (float)(_masks[i + 1].StartTime - _masks[i].StartTime);
-
-                //        float x1 = (float)(_masks[i].X * scaleWidth + dx);
-                //        float y1 = (float)(_masks[i].Y * scaleHeight + dy);
-                //        float w1 = (float)(_masks[i].Width * scaleWidth);
-                //        float h1 = (float)(_masks[i].Height * scaleHeight);
-
-                //        float x2 = (float)(_masks[i + 1].X * scaleWidth + dx);
-                //        float y2 = (float)(_masks[i + 1].Y * scaleHeight + dy);
-                //        float w2 = (float)(_masks[i + 1].Width * scaleWidth);
-                //        float h2 = (float)(_masks[i + 1].Height * scaleHeight);
-
-                //        float x = (x2 - x1) * ratio + x1;
-                //        float y = (y2 - y1) * ratio + y1;
-                //        float w = (w2 - w1) * ratio + w1;
-                //        float h = (h2 - h1) * ratio + h1;
-
-                //        using (var mask = CanvasGeometry.CreateRectangle(ds, x, y, w, h))
-                //        using (var layer1 = ds.CreateLayer(1f, mask))
-                //        using (var blurEffect = new GaussianBlurEffect())
-                //        {
-                //            blurEffect.BlurAmount = (float)_masks[i].BlurAmount;
-                //            blurEffect.BorderMode = EffectBorderMode.Hard;
-                //            blurEffect.Source = inputBitmap;
-                //            ds.DrawImage(blurEffect);
-                //        }
-                //    }
-                //}
             }
             catch { }
         }

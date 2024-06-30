@@ -71,7 +71,6 @@ namespace CensorVideo
             // Đăng ký sự kiện khi video kết thúc
             mediaPlayerElement.MediaPlayer.MediaEnded += videoEnded;
 
-            // cap nhat gia tri slider
             durationSlider.ValueChanged += durationSlider_ValueChanged;
             PlayBtn.IsEnabled = false;
 
@@ -80,7 +79,6 @@ namespace CensorVideo
             fontCombo.ItemsSource = systemFonts;
             fontCombo.SelectedValue = null;
 
-            //  khoi tao list cac watermark
             overlayElements = new ObservableCollection<GridWatermark>();
             DataContext = this;
             WatermarkListView.ItemsSource = overlayElements;
@@ -373,10 +371,6 @@ namespace CensorVideo
             Mask.PosY = (transform.Y + GridRect.WatermarkGrid.Height) / videoHeight;
             Mask.UIWidth = GridRect.WatermarkGrid.Width / videoWidth;
             Mask.UIHeight = GridRect.WatermarkGrid.Height / videoHeight;
-            /* var overlay = overlayElements[0];
-             var transform = overlay.WatermarkGrid.RenderTransform as TranslateTransform;
-             Mask.PosX = transform.X/videoWidth; Mask.PosY = transform.Y/videoHeight;
-             Mask.UIWidth = 50.0 / videoWidth; Mask.UIHeight = 50.0/ videoHeight;*/
             Mask.MaskType = 0;  //=0 mask co dinh, =1 tracking
             Mask.MaskShape = 1; //=0 ellipse, =1 rectangle
             Mask.StartTime = mediaPlayerElement.MediaPlayer.PlaybackSession.Position.TotalMilliseconds;
@@ -420,7 +414,6 @@ namespace CensorVideo
                         BitmapAlphaMode.Premultiplied);
 
                     // Tạo VideoFrame từ SoftwareBitmap
-                    //var videoFrame = VideoFrame.CreateWithSoftwareBitmap(softwareBitmap);
                     CanvasBitmap canvas = CanvasBitmap.CreateFromSoftwareBitmap(CanvasDevice.GetSharedDevice(), softwareBitmap);
 
                     MediaClip m = MediaClip.CreateFromSurface(canvas, duration);
@@ -450,7 +443,6 @@ namespace CensorVideo
                         BitmapAlphaMode.Premultiplied);
 
                     // Tạo VideoFrame từ SoftwareBitmap
-                    //var videoFrame = VideoFrame.CreateWithSoftwareBitmap(softwareBitmap);
                     CanvasBitmap canvas = CanvasBitmap.CreateFromSoftwareBitmap(CanvasDevice.GetSharedDevice(), softwareBitmap);
 
                     MediaClip m = MediaClip.CreateFromSurface(canvas, duration);
@@ -466,7 +458,7 @@ namespace CensorVideo
                     overlayLayer.Overlays.Add(overlayText);
                 }
 
-                // Thêm MediaOverlayLayer vào MediaComposition
+                // Add MediaOverlayLayer into MediaComposition
                 composition.OverlayLayers.Add(overlayLayer);
 
                 UpdateMediaElementSource();
