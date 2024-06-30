@@ -567,7 +567,7 @@ namespace CensorVideo
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        // sự kiện khi chọn cái watermark ở trong list thì sẽ hiển thị lại tất cả thuộc tính của cái đó: text, màu chữ, font chữ
+
         private string _inputText;
         public string InputText
         {
