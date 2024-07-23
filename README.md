@@ -24,6 +24,7 @@ Hướng dẫn cài đặt
 - Mở PowerShell (Administrator), cd vào thư mục dự định dùng để chứa vcpkg
 - Chạy 2 lệnh: 
 > git clone https://github.com/microsoft/vcpkg
+
 > .\vcpkg\bootstrap-vcpkg.bat
  
 2. Cài gói OpenCV x64
