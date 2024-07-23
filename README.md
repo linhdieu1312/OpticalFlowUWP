@@ -1,4 +1,5 @@
 Hướng dẫn cài đặt
+
 A. Yêu cầu:
 - Hệ điều hành từ Windows 10 trở lên
 - Visual Studio phiên bản 2022
@@ -14,6 +15,7 @@ B. Cài đặt các NuGet package trong các folder:
 	+ cài đặt Win2D.uwp
 	+ cài đặt Newtonsoft.Json
 	+ cài đặt Microsoft.NETCore.UniversalWindowsPlatform
+
 - Chọn folder CustomVideoEffects 
 	+ chọn Manage Nuget package > cài đặt Win2D.uwp và  Microsoft.NETCore.UniversalWindowsPlatform
 	+ chọn Add > Reference: chọn add component là  CommonLib và  OpenCVcomp
